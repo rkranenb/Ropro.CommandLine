@@ -1,0 +1,10 @@
+# build results 
+[Bb]in/ 
+[Oo]bj/ 
+ECHO is off.
+# development tools 
+.vscode/ 
+.vs/
+# helper and documentation files
+[Dd]oc/
+*.cmd

@@ -1,0 +1,36 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{F84F5890-49B9-46EF-BEC5-E5455A37C093}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ropro.CommandLine", "src\Ropro.CommandLine\Ropro.CommandLine.csproj", "{85CED59A-2AFC-4951-8546-9B1C07F4EE12}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{1BC9531F-E448-4ED3-92F9-CCEC56575DF6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ropro.CommandLine.Tests", "test\Ropro.CommandLine.Tests\Ropro.CommandLine.Tests.csproj", "{32810905-6A45-4693-B79E-BD0C01B052BF}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{85CED59A-2AFC-4951-8546-9B1C07F4EE12}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{85CED59A-2AFC-4951-8546-9B1C07F4EE12}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{85CED59A-2AFC-4951-8546-9B1C07F4EE12}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{85CED59A-2AFC-4951-8546-9B1C07F4EE12}.Release|Any CPU.Build.0 = Release|Any CPU
+		{32810905-6A45-4693-B79E-BD0C01B052BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{32810905-6A45-4693-B79E-BD0C01B052BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{32810905-6A45-4693-B79E-BD0C01B052BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{32810905-6A45-4693-B79E-BD0C01B052BF}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{85CED59A-2AFC-4951-8546-9B1C07F4EE12} = {F84F5890-49B9-46EF-BEC5-E5455A37C093}
+		{32810905-6A45-4693-B79E-BD0C01B052BF} = {1BC9531F-E448-4ED3-92F9-CCEC56575DF6}
+	EndGlobalSection
+EndGlobal
