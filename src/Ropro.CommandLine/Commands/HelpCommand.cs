@@ -23,11 +23,21 @@ public class HelpCommand : ICommand
 
     public bool Run(string key, string[] args)
     {
-        foreach (var c in commands)
+        foreach (var c in commands.OrderBy(x => x.GetKey()))
         {
-            if (!c.GetType().GetCustomAttributes(inherit: true)
-                .Any(a => a.GetType().Equals(typeof(HideFromHelpAttribute))))
-                console.WriteLine(c.GetType().Name);
+            var hide = c.GetType().GetCustomAttributes(inherit: true)
+                .Any(a => a.GetType().Equals(typeof(HideFromHelpAttribute)));
+            if (hide) break;
+            var helpText = (c.GetType().GetCustomAttributes(inherit: true)
+                .SingleOrDefault(a => a.GetType().Equals(typeof(HelpTextAttribute)))) as HelpTextAttribute;
+            if (helpText == null)
+            {
+                console.WriteLine($"  {c.GetKey()}");
+            }
+            else
+            {
+                console.WriteLine($"  {c.GetKey(),-18}{helpText.Text}");
+            }
         }
         return true;
     }

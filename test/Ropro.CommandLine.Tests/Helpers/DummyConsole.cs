@@ -1,6 +1,6 @@
 using Ropro.CommandLine.Console;
 
-namespace Helpers;
+namespace Ropro.CommandLine.Tests.Helpers;
 
 public class DummyConsole : IConsole
 {

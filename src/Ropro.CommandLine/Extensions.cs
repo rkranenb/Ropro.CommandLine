@@ -69,4 +69,9 @@ public static class Extensions
         return $"usage: [dotnet run] {attr.Usage}";
     }
 
+    public static string GetKey(this Command command)
+    {
+        return command.GetType().Name.Replace("Command", "").ToLower();
+    }
+
 }

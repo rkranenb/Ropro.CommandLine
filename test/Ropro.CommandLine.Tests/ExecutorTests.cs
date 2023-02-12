@@ -1,6 +1,5 @@
 using Ropro.CommandLine;
 using Ropro.CommandLine.Commands;
-using Helpers;
 using Ropro.CommandLine.Console;
 using Ropro.CommandLine.Tests.Helpers;
 

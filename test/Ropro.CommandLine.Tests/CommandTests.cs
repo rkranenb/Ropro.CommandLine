@@ -1,5 +1,5 @@
 using Ropro.CommandLine;
-using Helpers;
+using Ropro.CommandLine.Tests.Helpers;
 
 public class CommandTests
 {

@@ -1,6 +1,6 @@
 ﻿using Ropro.CommandLine;
 
-namespace Helpers;
+namespace Ropro.CommandLine.Tests.Helpers;
 
 public class MockCommand : Command
 {

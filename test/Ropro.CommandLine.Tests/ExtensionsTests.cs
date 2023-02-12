@@ -1,4 +1,4 @@
-using Helpers;
+using Ropro.CommandLine.Tests.Helpers;
 
 namespace Ropro.CommandLine.Tests;
 
@@ -31,11 +31,5 @@ public class ExtensionsTests
         var sut = new DummyCommand();
         var actual = sut.GetUsage();
         Assert.Equal("usage: [dotnet run] dummy arg1 arg2 -f flag", actual);
-    }
-
-    [Usage("dummy arg1 arg2 -f flag")]
-    private class DummyCommand : Command
-    {
-        public override bool Run(string key, string[] args) => true;
     }
 }
