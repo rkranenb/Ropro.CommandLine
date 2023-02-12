@@ -30,7 +30,7 @@ public class ExtensionsTests
     {
         var sut = new DummyCommand();
         var actual = sut.GetUsage();
-        Assert.Equal("[dotnet run] dummy arg1 arg2 -f flag", actual);
+        Assert.Equal("usage: [dotnet run] dummy arg1 arg2 -f flag", actual);
     }
 
     [Usage("dummy arg1 arg2 -f flag")]

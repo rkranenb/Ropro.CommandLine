@@ -66,7 +66,7 @@ public static class Extensions
             .SingleOrDefault(x => x.GetType() == typeof(UsageAttribute));
         var attr = usage as UsageAttribute;
         if (attr == null) return "No usage information is provided.";
-        return $"[dotnet run] {attr.Usage}";
+        return $"usage: [dotnet run] {attr.Usage}";
     }
 
 }
