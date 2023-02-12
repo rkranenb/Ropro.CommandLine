@@ -51,8 +51,8 @@ To get help a user can type `help` either in the REPL or from the CLI. This will
 
 As this may not be very helpful, you may provide additional information my using the `HelpText`attribute:
 
-[HelpText("Writes 'foo' to the console.")]
-public class FooCommand : Command { ... }
+    [HelpText("Writes 'foo' to the console.")]
+    public class FooCommand : Command { ... }
 
 This provides the user with a bit more help:
 
