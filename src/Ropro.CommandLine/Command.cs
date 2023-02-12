@@ -12,9 +12,9 @@ public abstract class Command : ICommand
     {
         var aliases = this.GetType().GetCustomAttributes(inherit: false)
             .Where(x => x.GetType() == typeof(AliasAttribute))
-            #pragma warning disable CS8602
+#pragma warning disable CS8602
             .Select(x => (x as AliasAttribute).Alias);
-        return $"{arg}Command".Equals(this.GetType().Name, StringComparison.OrdinalIgnoreCase)
+        return arg.Equals(this.GetKey(), StringComparison.OrdinalIgnoreCase)
             || aliases.Any(x => x.Equals(arg, StringComparison.OrdinalIgnoreCase));
 
     }
