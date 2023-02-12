@@ -31,13 +31,14 @@ public class Executor : IExecutor
         catch (CommandException e)
         {
             console.Warn(e.Message);
+            console.WriteLine(e.Command.GetUsage());
             return true;
         }
         catch (Exception e)
         {
             console.Alert($"Exiting due to an unexpected error: {e.Message}");
             return false;
-        }        
+        }
     }
 
 }

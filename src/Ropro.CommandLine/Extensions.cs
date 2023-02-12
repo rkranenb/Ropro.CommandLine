@@ -59,4 +59,14 @@ public static class Extensions
         return re.Matches(s).Select(m => m.Value).ToArray();
     }
 
+    public static string GetUsage(this Command command)
+    {
+        var usage = command.GetType()
+            .GetCustomAttributes(inherit: false)
+            .SingleOrDefault(x => x.GetType() == typeof(UsageAttribute));
+        var attr = usage as UsageAttribute;
+        if (attr == null) return "No usage information is provided.";
+        return $"[dotnet run] {attr.Usage}";
+    }
+
 }

@@ -1,6 +1,8 @@
 using Ropro.CommandLine;
 using Ropro.CommandLine.Commands;
 using Helpers;
+using Ropro.CommandLine.Console;
+using Ropro.CommandLine.Tests.Helpers;
 
 public class ExecutorTests
 {
@@ -45,11 +47,66 @@ public class ExecutorTests
         Assert.Equal(1, command3.RunCount);
     }
 
+    private class NonBreakingExceptionCommand : Command
+    {
+        public override bool Run(string key, string[] args) =>
+            throw new CommandException(this, "Message goes here.");
+    }
+
+    [Fact]
+    public void CommandException_is_written_to_console()
+    {
+        var console = new SpyConsole();
+        var sut = CreateExecutor(console, new NonBreakingExceptionCommand());
+        sut.Start(new[] { "NonBreakingException" });
+        var actual = console.ToString();
+        Assert.Equal($"#color Yellow#Message goes here.{Environment.NewLine}#endcolor#No usage information is provided.{Environment.NewLine}", actual);
+    }
+
+    [Fact]
+    public void CommandException_does_not_break_repl()
+    {
+        var console = new SpyConsole();
+        var sut = CreateExecutor(console, new NonBreakingExceptionCommand());
+        var actual = sut.Start(new[] { "NonBreakingException" });
+        Assert.True(actual);
+    }
+
+    private class BreakingExceptionCommand : Command
+    {
+        public override bool Run(string key, string[] args) =>
+            throw new Exception("Message goes here.");
+    }
+
+    [Fact]
+    public void Unhandled_exception_is_written_to_console()
+    {
+        var console = new SpyConsole();
+        var sut = CreateExecutor(console, new BreakingExceptionCommand());
+        sut.Start(new[] { "BreakingException" });
+        var actual = console.ToString();
+        Assert.Equal($"#color Red#Exiting due to an unexpected error: Message goes here.{Environment.NewLine}#endcolor#", actual);
+    }
+
+    [Fact]
+    public void Unhandled_exception_does_break_repl()
+    {
+        var console = new SpyConsole();
+        var sut = CreateExecutor(console, new BreakingExceptionCommand());
+        var actual = sut.Start(new[] { "BreakingException" });
+        Assert.False(actual);
+    }
+
     private IExecutor CreateExecutor(params Command[] c)
     {
+        return CreateExecutor(new DummyConsole(), c);
+    }
+
+    private IExecutor CreateExecutor(IConsole console, params Command[] c)
+    {
         var commands = c ?? new[] { new MockCommand() };
-        var help = new HelpCommand(commands, new DummyConsole());
-        return new Executor(new DummyConsole(), commands, help);
+        var help = new HelpCommand(commands, console);
+        return new Executor(console, commands, help);
     }
 
 }

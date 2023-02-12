@@ -1,3 +1,5 @@
+using Helpers;
+
 namespace Ropro.CommandLine.Tests;
 
 public class ExtensionsTests
@@ -13,5 +15,27 @@ public class ExtensionsTests
     {
         var actual = s.SplitSmart();
         Assert.Equal(expected, actual);
+    }
+
+    [Fact]
+    public void GetUsage_returns_default_usage_if_not_provided()
+    {
+        var sut = new MockCommand();
+        var actual = sut.GetUsage();
+        Assert.Equal("No usage information is provided.", actual);
+    }
+
+    [Fact]
+    public void GetUsage_returns_usage_if_provided()
+    {
+        var sut = new DummyCommand();
+        var actual = sut.GetUsage();
+        Assert.Equal("[dotnet run] dummy arg1 arg2 -f flag", actual);
+    }
+
+    [Usage("dummy arg1 arg2 -f flag")]
+    private class DummyCommand : Command
+    {
+        public override bool Run(string key, string[] args) => true;
     }
 }
