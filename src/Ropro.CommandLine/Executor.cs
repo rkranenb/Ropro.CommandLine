@@ -19,10 +19,25 @@ public class Executor : IExecutor
         this.commands.Add(help);
         this.console = console;
     }
+
     public bool Start(string[] args)
-    {        
-        return args.Length == 0 || commands.OrderBy(c => c.Order)
-            .First(c => c.MustRun(args))
-            .Run(args[0], args.Skip(1).ToArray());
+    {
+        try
+        {
+            return args.Length == 0 || commands.OrderBy(c => c.Order)
+                .First(c => c.MustRun(args))
+                .Run(args[0], args.Skip(1).ToArray());
+        }
+        catch (CommandException e)
+        {
+            console.Warn(e.Message);
+            return true;
+        }
+        catch (Exception e)
+        {
+            console.Alert($"Exiting due to an unexpected error: {e.Message}");
+            return false;
+        }        
     }
+
 }
