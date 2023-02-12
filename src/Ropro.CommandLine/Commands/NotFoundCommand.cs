@@ -15,7 +15,7 @@ public class NotFoundCommand : Command
     public override int Order => int.MaxValue;
 
     public override bool Run(string key,string[] args) {
-        console.WriteLine($"Unknown command '{key}'. See '--help'.");
+        console.WriteLine($"Unknown command '{key}'. See 'help' for available commands.");
         return true;
     }
 
