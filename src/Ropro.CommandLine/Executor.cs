@@ -24,9 +24,20 @@ public class Executor : IExecutor
     {
         try
         {
-            return args.Length == 0 || commands.OrderBy(c => c.Order)
-                .First(c => c.MustRun(args))
-                .Run(args[0], args.Skip(1).ToArray());
+            if (args.Length == 0) return true;
+            var command = commands.OrderBy(c => c.Order)
+                .FirstOrDefault(c => c.MustRun(args));
+            if (command == null)
+            {
+                console.Warn($"No such command: '{args[0]}'.");
+                return true;
+            }
+            return command.Run(args[0], args.Skip(1).ToArray());
+        }
+        catch (CommandArgumentException e)
+        {
+            console.Warn(e.Message);
+            return true;
         }
         catch (CommandException e)
         {

@@ -7,6 +7,26 @@ public class ExecutorTests
 {
 
     [Fact]
+    public void Unknown_command_does_not_break_repl()
+    {
+        var args = new[] { "mock" };
+        var sut = CreateExecutor(new MockCommand());
+        var actual = sut.Start(args);
+        Assert.True(actual);
+    }
+
+    [Fact]
+    public void Unknown_command_writes_notification_to_console()
+    {
+        var args = new[] { "mock" };
+        var console = new SpyConsole();
+        var sut = CreateExecutor(console, new MockCommand());
+        sut.Start(args);
+        var actual = console.ToString();
+        Assert.Equal($"#color Yellow#No such command: 'mock'.{Environment.NewLine}#endcolor#", actual);
+    }
+
+    [Fact]
     public void Name_and_arguments_are_passed()
     {
         // arrange        
@@ -69,6 +89,32 @@ public class ExecutorTests
         var sut = CreateExecutor(console, new NonBreakingExceptionCommand());
         var actual = sut.Start(new[] { "NonBreakingException" });
         Assert.True(actual);
+    }
+
+    [Fact]
+    public void CommandArgumentException_does_not_break_repl()
+    {
+        var sut = CreateExecutor(new CommandArgumentExceptionCommand());
+        var actual = sut.Start(new[] { "ArgumentException" });
+        Assert.True(actual);
+    }
+
+    [Fact]
+    public void CommandArgumentException_is_written_to_console()
+    {
+        var console = new SpyConsole();
+        var sut = CreateExecutor(console, new CommandArgumentExceptionCommand());
+        sut.Start(new[] { "ArgumentException" });
+        var actual = console.ToString();
+        Assert.Equal($"#color Yellow#Message goes here.{Environment.NewLine}#endcolor#", actual);
+    }
+
+    private class CommandArgumentExceptionCommand : Command
+    {
+        public override bool Run(string key, string[] args)
+        {
+            throw new CommandArgumentException("Message goes here.");
+        }
     }
 
     private class BreakingExceptionCommand : Command
