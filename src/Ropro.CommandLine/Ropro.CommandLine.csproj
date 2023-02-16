@@ -5,8 +5,9 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <PackageId>Ropro.CommandLine</PackageId>
-    <Version>0.1.1</Version>
+    <Version>0.2.1</Version>
     <Authors>Robert Kranenburg</Authors>
+    <ProjectUrl>https://github.com/rkranenb/Ropro.CommandLine</ProjectUrl>
     <Company>Ropro</Company>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
