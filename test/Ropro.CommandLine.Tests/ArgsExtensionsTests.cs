@@ -35,11 +35,17 @@ public class ArgsExtensionsTests
 
     [Theory]
     [InlineData("-d")]
-    [InlineData("-d", "not a date")]
-    [InlineData()]
+    [InlineData("-d", "not a date")]    
     [InlineData("--date", "2023-02-14")]
     public void GetDate_throws_exception_if_no_datetime_is_provided(params string[] args)
     {
+        var actual = Assert.Throws<CommandArgumentException>(() => args.GetDate("-d"));
+        Assert.Equal("Unexpected value provided for '-d'. Expected a date.", actual.Message);
+    }
+
+    [Fact]
+    public void GetDate_throws_exception_if_no_args_are_provided() {
+        var args = new string[] { };
         var actual = Assert.Throws<CommandArgumentException>(() => args.GetDate("-d"));
         Assert.Equal("Unexpected value provided for '-d'. Expected a date.", actual.Message);
     }
@@ -55,15 +61,20 @@ public class ArgsExtensionsTests
     [Theory]
     [InlineData("-i")]
     [InlineData("-i", "not an int")]
-    [InlineData()]
     [InlineData("--int", "123")]
     [InlineData("-i", "123.56")]
     [InlineData("-i", "123,56")]
     public void GetInt_throws_exception_if_no_int_is_provided(params string[] args)
     {
-        var actual = Assert.Throws<CommandArgumentException>(() => args.GetInt("-d"));
-        Assert.Equal("Unexpected value provided for '-d'. Expected an integer number.", actual.Message);
+        var actual = Assert.Throws<CommandArgumentException>(() => args.GetInt("-i"));
+        Assert.Equal("Unexpected value provided for '-i'. Expected an integer number.", actual.Message);
     }
 
+    [Fact]
+    public void GetInt_throws_exception_if_no_args_are_provided() {
+        var args = new string[] { };
+        var actual = Assert.Throws<CommandArgumentException>(() => args.GetInt("-i"));
+        Assert.Equal("Unexpected value provided for '-i'. Expected an integer number.", actual.Message);
+    }
 
 }
