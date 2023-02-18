@@ -7,7 +7,7 @@ From the CLI, create a new console application:
     
    Add the package:
 
-    dotnet add package Ropro.CommandLine --version 0.1.0
+    dotnet add package Ropro.CommandLine --version 0.2.0
 
 Open your favorite editor and and add a new class:
 
