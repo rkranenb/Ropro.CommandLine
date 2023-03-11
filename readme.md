@@ -1,5 +1,5 @@
 # What's CommandLine
-It is a simple framework that helps build console apps with multiple commands.
+It is a simple framework that helps build console apps with multiple commands. It is a work in progress (hence the 0.x version). On my wish list are helpers for arguments and to return a Task, rather than a bool, to make async operations easier to implement. Stay tuned.
 # Quick start
 From the CLI, create a new console application:
 
